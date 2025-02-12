@@ -35,6 +35,7 @@ namespace Administratie_Programma
                 }
                 else if (keuzeMenu == "3")
                 {
+                    Console.Clear();
                     return;
                 }
                 else
@@ -56,8 +57,8 @@ namespace Administratie_Programma
                 Console.Write("Keuze: ");
                 string keuze = Console.ReadLine()?.ToLower();
                 if (keuze == "1")
-                {
-                    Console.WriteLine("Klanten beheren");
+                { 
+                    ClientManagement();
                 }
                 else if (keuze == "2")
                 {
@@ -91,11 +92,15 @@ namespace Administratie_Programma
             Console.Write("Password: ");
             string password = Console.ReadLine();
             Console.Clear();
+            Console.WriteLine("Registratie laadt...");
+            Thread.Sleep(1500);
+            
 
             if (!users.ContainsKey(username))
             {
                 users.Add(username, password);
                 Console.WriteLine("Registratie succesvol!");
+                Thread.Sleep(900);
                 Console.Clear();
             }
             else
@@ -122,7 +127,46 @@ namespace Administratie_Programma
             else
             {
                 Console.WriteLine("Username/password incorrect");
+                Thread.Sleep(2000);
+                Console.Clear();
                 return false;
+            }
+        }
+        private static void ClientManagement()
+        {
+            if (true)
+            {
+                Console.Clear();
+                Console.WriteLine("Klanten beheren");
+                Thread.Sleep(2000);
+                Console.Clear();
+                Console.WriteLine("1. Klant toevoegen");
+                Console.WriteLine("2. Klant verwijderen");
+                Console.WriteLine("3. Terug");
+                string keuze = Console.ReadLine();
+
+                if (keuze == "1")
+                {
+                    Console.Write("voornaam: ");
+                    string voornaam = Console.ReadLine();
+                    Console.Clear();
+                    Console.Write("achternaam: ");
+                    string achternaam = Console.ReadLine();
+                    Console.Clear();
+                }
+                else if (keuze == "2")
+                {
+                    Console.Write("voornaam: ");
+                    string voornaam = Console.ReadLine();
+                    Console.Clear();
+                    Console.Write("achternaam: ");
+                    string achternaam = Console.ReadLine();
+                    Console.Clear();
+                }
+                else
+                { 
+                    Console.Clear();
+                }
             }
         }
     }
