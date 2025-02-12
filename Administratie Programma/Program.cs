@@ -166,6 +166,7 @@ namespace Administratie_Programma
                 else
                 { 
                     Console.Clear();
+
                 }
             }
         }
