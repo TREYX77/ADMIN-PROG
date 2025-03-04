@@ -86,7 +86,7 @@ namespace Administratie_Programma
                 }
             }
         }
-
+        
         private static void Register()
         {
             Console.WriteLine("Registreren");
@@ -147,7 +147,8 @@ namespace Administratie_Programma
             Console.Clear();
             Console.WriteLine("1. Klant toevoegen");
             Console.WriteLine("2. Klant verwijderen");
-            Console.WriteLine("3. Terug");
+            Console.WriteLine("3. Klant bewerken");
+            Console.WriteLine("4. Terug");
             string keuze = Console.ReadLine();
 
             if (keuze == "1")
@@ -157,7 +158,13 @@ namespace Administratie_Programma
                 Console.Clear();
                 Console.Write("Achternaam: ");
                 string achternaam = Console.ReadLine();
-                clients.Add(new Client { Voornaam = voornaam, Achternaam = achternaam });
+                Console.Clear();
+                Console.Write("Adres: ");
+                string adres = Console.ReadLine();
+                Console.Clear();
+                Console.Write("Telefoonnummer: ");
+                string telefoonnummer = Console.ReadLine();
+                clients.Add(new Client { Voornaam = voornaam, Achternaam = achternaam, Adres = adres, Telefoonnummer = telefoonnummer });
                 Console.Clear();
             }
             else if (keuze == "2")
@@ -168,8 +175,45 @@ namespace Administratie_Programma
                 clients.RemoveAll(c => c.Voornaam == voornaam);
                 Console.Clear();
             }
+            else if (keuze == "3")
+            {
+                EditClient();
+            }
             else
             {
+                Console.Clear();
+            }
+        }
+
+        private static void EditClient()
+        {
+            Console.Write("Voornaam van de klant die u wilt bewerken: ");
+            string voornaam = Console.ReadLine();
+            Console.Clear();
+            Client client = clients.Find(c => c.Voornaam == voornaam);
+
+            if (client != null)
+            {
+                Console.Write("Nieuwe voornaam: ");
+                client.Voornaam = Console.ReadLine();
+                Console.Clear();
+                Console.Write("Nieuwe achternaam: ");
+                client.Achternaam = Console.ReadLine();
+                Console.Clear();
+                Console.Write("Nieuw adres: ");
+                client.Adres = Console.ReadLine();
+                Console.Clear();
+                Console.Write("Nieuw telefoonnummer: ");
+                client.Telefoonnummer = Console.ReadLine();
+                Console.Clear();
+                Console.WriteLine("Klantgegevens bijgewerkt!");
+                Thread.Sleep(900);
+                Console.Clear();
+            }
+            else
+            {
+                Console.WriteLine("Klant niet gevonden.");
+                Thread.Sleep(900);
                 Console.Clear();
             }
         }
@@ -188,7 +232,7 @@ namespace Administratie_Programma
             {
                 foreach (var client in clients)
                 {
-                    Console.WriteLine($"Voornaam: {client.Voornaam}, Achternaam: {client.Achternaam}");
+                    Console.WriteLine($"Voornaam: {client.Voornaam}, Achternaam: {client.Achternaam}, Adres: {client.Adres}, Telefoonnummer: {client.Telefoonnummer}");
                 }
             }
         }
@@ -196,9 +240,30 @@ namespace Administratie_Programma
         private static void OrderManagement()
         {
             Console.Clear();
-            Console.WriteLine("Bestellingen beheren");
-            Thread.Sleep(2000);
-            Console.Clear();
+            Console.WriteLine("Bestellingen beheren...");
+            Thread.Sleep(1500);
+
+            if (clients.Count == 0)
+            {
+                Console.WriteLine("Geen klanten gevonden om te bewerken.");
+            }
+            else
+            {
+                foreach (var client in clients)
+                {
+                    Console.WriteLine($"Klant: {client.Voornaam}, {client.Achternaam}");
+                }
+                Console.Write("Kies een klant: ");
+                string klantKeuze = Console.ReadLine();
+                Thread.Sleep(500);
+                Console.Clear();
+                Console.WriteLine("Geen bestellingen gevonden.");
+                Thread.Sleep(900);
+                Console.WriteLine("Kies ander klant..");
+                Thread.Sleep(1500);
+                Console.Clear();
+                return;
+            }
         }
 
         private static void InvoiceManagement()
@@ -214,5 +279,7 @@ namespace Administratie_Programma
     {
         public string Voornaam { get; set; }
         public string Achternaam { get; set; }
+        public string Adres { get; set; }
+        public string Telefoonnummer { get; set; }
     }
 }
